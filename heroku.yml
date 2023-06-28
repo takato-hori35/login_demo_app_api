@@ -1,0 +1,24 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+  # 環境変数
+  config:
+    # Rack: http送受信処理を担当するモジュールに対して現在の環境を示す
+    RACK_ENV: production
+    RAILS_ENV: production
+    # logを標準で出力するか否かのフラグ
+    RAILS_LOG_TO_STDOUT: enabled
+    # publicディレクトリからの静的ファイルを提供してもらうか否か（apiモードではあんま意味ないかも）
+    # デフォの設定に従って残しておく
+    RAILS_SERVE_STATIC_FILES: enabled
+build:
+  # 参照するDockerfileの場所を定義（相対path）
+  docker:
+    # webはdocker-compose.ymlのappのように任意っぽいが、必ずwebと記述
+    web: Dockerfile
+  # Dockerfileに渡す。docker-compose.ymlのARG と同じものを記載しないと環境がズレる
+  config:
+    WORKDIR: app
+run:
+  # pumaを起動させ、設定ファイルを読み込むよう指定する
+  web: bundle exec puma -C config/puma.rb
