@@ -22,4 +22,9 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  # アクティブユーザーを返す
+  def active_user
+    User.find_by(activated: true)
+  end
 end
