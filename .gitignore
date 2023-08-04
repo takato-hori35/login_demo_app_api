@@ -31,3 +31,6 @@
 /.ash_history
 # コンソールで実行したコマンドの履歴ファイル
 /.irb_history
+
+/.psql_history
+/.rdbg_history
